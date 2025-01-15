@@ -1,12 +1,12 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const artifact = require('@actions/artifact');
+const {DefaultArtifactClient} = require('@actions/artifact')
 const fs = require('fs');
 const path = require('path');
 
 async function run() {
   try {
-    const artifactClient = artifact.create();
+    const artifactClient = new DefaultArtifactClient();
     const downloadPath = path.join(__dirname, 'artifacts');
     const artifactName = 'plugin-artifact'; // 替换为你的工件名称
 

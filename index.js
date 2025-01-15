@@ -8,11 +8,13 @@ async function run() {
   try {
     const artifactClient = new DefaultArtifactClient();
     const downloadPath = path.join(__dirname, 'artifacts');
-    const artifactName = 'plugin-json'; // 替换为你的工件名称
+
+    const artifactRes = artifactClient.getArtifact('plugin-json');
+    const artifactId = artifactRes?.artifact.id;
 
     // 下载工件
-    const downloadResponse = await artifactClient.downloadArtifact(artifactName, downloadPath);
-    
+    const downloadResponse = await artifactClient.downloadArtifact(artifactId, downloadPath);
+
     // log response
     console.log('Downloaded artifact:', JSON.stringify(downloadResponse, null, 2));
 

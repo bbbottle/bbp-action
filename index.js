@@ -1,18 +1,15 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs');
+const path = require('path');
 
 try {
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-
-  const data = fs.readFileSync('plugin.json', 'utf8');
-  const jsonData = JSON.parse(data);
-
-  // 输出 JSON 数据
-  console.log(jsonData);
+  const pluginPath = path.join(__dirname, 'plugin.json');
+  if (!fs.existsSync(pluginPath)) {
+    throw new Error(`File not found: ${pluginPath}`);
+  }
+  const pluginData = fs.readFileSync(pluginPath, 'utf-8');
+  console.log('Plugin data:', pluginData);
 } catch (error) {
-  core.setFailed(error.message);
+  core.setFailed(`Action failed with error: ${error.message}`);
 }
-
-

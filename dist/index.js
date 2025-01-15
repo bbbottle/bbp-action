@@ -31813,6 +31813,7 @@ module.exports = parseParams
 var __webpack_exports__ = {};
 const core = __nccwpck_require__(8899);
 const github = __nccwpck_require__(4351);
+const fs = __nccwpck_require__(9896);
 
 try {
   const nameToGreet = core.getInput('who-to-greet');

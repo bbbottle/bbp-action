@@ -31817,9 +31817,17 @@ const github = __nccwpck_require__(4351);
 try {
   const nameToGreet = core.getInput('who-to-greet');
   console.log(`Hello ${nameToGreet}!`);
+
+  const data = fs.readFileSync('plugin.json', 'utf8');
+  const jsonData = JSON.parse(data);
+
+  // 输出 JSON 数据
+  console.log(jsonData);
 } catch (error) {
   core.setFailed(error.message);
 }
+
+
 
 module.exports = __webpack_exports__;
 /******/ })()

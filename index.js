@@ -5,16 +5,18 @@ const fs = require('fs');
 const path = require('path');
 
 const getArtifactId = async (artifactClient, artifactName) => {
-    const artifactInfo = await artifactClient.getArtifact(artifactName);
+  const artifactInfo = await artifactClient.getArtifact(artifactName);
   return artifactInfo?.artifact.id;
 }
 
 const createDownloader = (artifactClient) => async (artifactName, encoding) => {
     const artifactId = await getArtifactId(artifactClient, artifactName);
     const downloadPath = path.join(__dirname, 'artifacts');
-    const downloadResponse = await artifactClient.downloadArtifact(artifactId, downloadPath);
-    const filePath = path.join(downloadResponse.downloadPath, artifactName);
-    return fs.readFileSync(filePath, encoding);
+    const downloadResponse = await artifactClient.downloadArtifact(artifactId, {
+      path: downloadPath
+    });
+
+    return fs.readFileSync(downloadResponse.downloadPath, encoding);
 }
 
 async function run() {
@@ -24,7 +26,8 @@ async function run() {
     console.log(pluginData);
 
     const wasmFile = await downloader('wasm-file');
-    console.log(wasmFile);
+    console.log(wasmFile.buffer);
+
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }

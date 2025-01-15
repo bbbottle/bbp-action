@@ -22,25 +22,19 @@ const createDownloader = (artifactClient) => async (artifactName, fileName, enco
 
 async function run() {
   try {
-    // const downloader = createDownloader(new DefaultArtifactClient());
-    // const pluginData = await downloader('plugin-json', 'plugin.json', 'utf-8');
-    // console.log(pluginData);
+    const downloader = createDownloader(new DefaultArtifactClient());
+    const pluginData = await downloader(
+      core.getInput('configArtifactName'),
+      core.getInput('configFileName'),
+      'utf-8'
+    );
+    console.log(pluginData);
 
-    // const wasmFile = await downloader('wasm-file', 'bbp_now.wasm', 'binary');
-
-    // exec ls -la
-    exec("ls -la", (error, stdout, stderr) => {
-      if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-    });
-
+    const wasmFile = await downloader(
+      core.getInput('wasmArtifactName'),
+      core.getInput('wasmFileName'),
+      'binary'
+    );
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }

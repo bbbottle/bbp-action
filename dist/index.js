@@ -31814,22 +31814,18 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(8899);
 const github = __nccwpck_require__(4351);
 const fs = __nccwpck_require__(9896);
+const path = __nccwpck_require__(6928);
 
 try {
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-
-  const data = fs.readFileSync('plugin.json', 'utf8');
-  const jsonData = JSON.parse(data);
-
-  // 输出 JSON 数据
-  console.log(jsonData);
+  const pluginPath = path.join(__dirname, 'plugin.json');
+  if (!fs.existsSync(pluginPath)) {
+    throw new Error(`File not found: ${pluginPath}`);
+  }
+  const pluginData = fs.readFileSync(pluginPath, 'utf-8');
+  console.log('Plugin data:', pluginData);
 } catch (error) {
-  core.setFailed(error.message);
+  core.setFailed(`Action failed with error: ${error.message}`);
 }
-
-
-
 module.exports = __webpack_exports__;
 /******/ })()
 ;

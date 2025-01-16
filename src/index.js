@@ -19,7 +19,8 @@ async function run() {
       'binary'
     );
 
-    upload(wasmName, wasmFile);
+    const res = upload(wasmName, wasmFile);
+    console.log(JSON.stringify(res, null, 2));
 
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);

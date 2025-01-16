@@ -1,26 +1,14 @@
 name: 'release bbp action'
 description: 'release plugins for bbki.ng'
 author: 'bbki.ng'
-
 inputs:
-  vercelToken:
+  token:
     description: 'The token of vercel'
     required: true
 
 runs:
-  using: 'composite'
-  steps:
-    - uses: actions/checkout@v4
-    - name: add target
-      run: rustup target add wasm32-unknown-unknown
-      shell: bash
-    - name: Build
-      run: cargo build --target wasm32-unknown-unknown --release
-      shell: bash
-    - name: release
-      uses: './actions/release'
-      with:
-        vercelToken: ${{ inputs.vercelToken }}
+  using: 'node20'
+  main: 'dist/index.js'
 
 branding:
   icon: 'coffee'

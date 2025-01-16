@@ -1,10 +1,6 @@
 name: 'release bbp action'
 description: 'release plugins for bbki.ng'
 author: 'bbki.ng'
-inputs:
-  token:
-    description: 'The token of vercel'
-    required: true
 
 runs:
   using: 'composite'

@@ -2,11 +2,10 @@
   "name": "release-bbp-action",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build index.js",
-    "prepare": "husky"
+    "build": "ncc build src/index.js",
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,8 @@
   "dependencies": {
     "@actions/artifact": "^2.2.1",
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "@vercel/ncc": "^0.38.3"
   },
   "devDependencies": {
     "husky": "^9.1.7"

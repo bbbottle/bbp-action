@@ -13,7 +13,7 @@ runs:
       run: cargo build --target wasm32-unknown-unknown --release
       shell: bash
     - name: release
-      using: './actions/release'
+      uses: './actions/release'
       with:
         wasmArtifactName: wasm-file
         wasmFileName: bbp_now.wasm

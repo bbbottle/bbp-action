@@ -19,6 +19,8 @@ async function run() {
       'binary'
     );
 
+    console.log(`Uploading ${wasmName} to OSS... ${wasmFile.length} bytes`);
+
     const res = upload(wasmName, wasmFile);
     console.log(JSON.stringify(res, null, 2));
 

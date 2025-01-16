@@ -25,7 +25,7 @@ export const PickSecrets = async (vercelSecrets, secretsName) => {
     return secrets
   }
 
-  const res = await  Promise.all(vercelSecrets.envs
+  const res = await Promise.all(vercelSecrets.envs
     .filter((env) => {
       return secretsName.includes(env.key)
     })
@@ -34,9 +34,9 @@ export const PickSecrets = async (vercelSecrets, secretsName) => {
     }))
 
   res.forEach((env) => {
+    console.log("env: " + JSON.stringify(env, null, 2));
     secrets[env.key] = env.value;
   });
 
-  console.log(JSON.stringify(secrets, null, 2));
   return secrets;
 }

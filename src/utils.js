@@ -21,4 +21,6 @@ export const PickSecrets = (vercelSecrets, secretsName) => {
   secretsName.forEach(name => {
     secrets[name] = vercelSecrets.envs.find(secret => secret.key === name).value;
   });
+
+  return secrets;
 }

@@ -4,9 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "git add . && git commit -m 'build' && npm version patch && ncc build src/index.js",
-    "pub": "git tag -a v%npm_package_version% -m 'v$npm_package_version' && git push --follow-tags"
+    "pub": "git add . && git commit -m 'build' && npm version patch && ncc build src/index.js && git push --follow-tags"
   },
   "keywords": [],
   "author": "",

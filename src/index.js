@@ -20,6 +20,7 @@ async function run() {
     );
 
     const res = upload(wasmName, wasmFile);
+
     console.log(JSON.stringify(res, null, 2));
 
   } catch (error) {

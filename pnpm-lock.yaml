@@ -14,6 +14,9 @@ dependencies:
   '@actions/github':
     specifier: ^6.0.0
     version: 6.0.0
+  '@types/ali-oss':
+    specifier: ^6.16.11
+    version: 6.16.11
   '@vercel/ncc':
     specifier: ^0.38.3
     version: 0.38.3
@@ -472,6 +475,10 @@ packages:
 
   /@protobuf-ts/runtime@2.9.4:
     resolution: {integrity: sha512-vHRFWtJJB/SiogWDF0ypoKfRIZ41Kq+G9cEFj6Qm1eQaAhJ1LDFvgZ7Ja4tb3iLOQhz0PaoPnnOijF1qmEqTxg==}
+    dev: false
+
+  /@types/ali-oss@6.16.11:
+    resolution: {integrity: sha512-/AyemPZy93ZXGzEokMsoPFgjH37snpzH4X/fwans/n63HLaCleriCG3PyrkHCPkgHEc9vj9Uo6paqsBN3vJ3OA==}
     dev: false
 
   /@vercel/ncc@0.38.3:

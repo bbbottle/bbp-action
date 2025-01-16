@@ -15,8 +15,7 @@ async function run() {
     const wasmName = core.getInput('wasmFileName');
     const wasmFile = await download(
       core.getInput('wasmArtifactName'),
-      wasmName,
-      'binary'
+      wasmName
     );
 
     console.log(`Uploading ${wasmName} to OSS... ${wasmFile.length} bytes`);

@@ -12,9 +12,10 @@
   "dependencies": {
     "@actions/artifact": "^2.2.1",
     "@actions/core": "^1.11.1",
-    "ali-oss": "^6.17.1",
     "@actions/github": "^6.0.0",
-    "@vercel/ncc": "^0.38.3"
+    "@types/ali-oss": "^6.16.11",
+    "@vercel/ncc": "^0.38.3",
+    "ali-oss": "^6.17.1"
   },
   "devDependencies": {
     "husky": "^9.1.7"

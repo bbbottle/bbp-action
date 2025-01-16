@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "pub": "git add . && git commit -m 'build' && npm version patch && ncc build src/index.js && git push --follow-tags"
+    "pub": "ncc build src/index.js && git add . && git commit -m 'build' && npm version patch && git push --follow-tags"
   },
   "keywords": [],
   "author": "",

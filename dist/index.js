@@ -25641,27 +25641,8 @@ module.exports = {
 "use strict";
 __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   fetchVercelSecrets: () => (/* binding */ fetchVercelSecrets),
-/* harmony export */   getPluginConfig: () => (/* binding */ getPluginConfig),
-/* harmony export */   getWasmFile: () => (/* binding */ getWasmFile)
+/* harmony export */   fetchVercelSecrets: () => (/* binding */ fetchVercelSecrets)
 /* harmony export */ });
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(9896);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(6928);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-const getPluginConfig = () => {
-  const file = fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(path__WEBPACK_IMPORTED_MODULE_1___default().join(__dirname, 'plugin.json'), 'utf8');
-  return JSON.parse(file);
-}
-
-const getWasmFile = (fileName) => {
-  const filePath = path__WEBPACK_IMPORTED_MODULE_1___default().join(__dirname, `target/wasm32-unknown-unknown/release/${fileName}`);
-  return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath);
-}
-
 const buildVercelEndpoint = (pid, slug, tid) => {
   return `https://api.vercel.com/v3/secrets?projectId=${pid}&slug=${slug}&teamId=${tid}`;
 }
@@ -25673,7 +25654,7 @@ const fetchVercelSecrets = async (token) => {
     "team_MIsUMNw4utGbdrDSmat8F2Y6"
   );
 
-  return await fetch(endpoint, {
+  return fetch(endpoint, {
     "headers": {
       "Authorization": `Bearer ${token}`
     },
@@ -27582,18 +27563,6 @@ module.exports = parseParams
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

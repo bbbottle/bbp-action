@@ -8,8 +8,7 @@ const vercel = new Vercel({
 export const fetchVercelSecrets = async () => {
   return  vercel.projects.filterProjectEnvs({
     idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
-    decrypt: "true",
-    teamId: "team_8Zd0XZ4fZmzQw2Z9Zq1k5XHJ"
+    decrypt: "true"
   })
 }
 

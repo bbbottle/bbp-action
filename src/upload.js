@@ -1,4 +1,4 @@
-const OSS = require("ali-oss");
+import OSS from 'ali-oss';
 const core = require('@actions/core');
 
 const client = new OSS({
@@ -10,6 +10,6 @@ const client = new OSS({
   secure: true,
 });
 
-export const upload = (name, file) => {
+export const upload = async (name, file) => {
   return client.put(name, file);
 };

@@ -2,44 +2,10 @@ name: 'release bbp action'
 description: 'release plugins for bbki.ng'
 author: 'bbki.ng'
 inputs:
-  configArtifactName:
-    description: 'The name of the artifact to use for the configuration'
-    required: false
-    default: 'plugin-config'
-  configFileName:
-    description: 'The name of the configuration file'
-    required: false
-    default: 'plugin.json'
-  wasmArtifactName:
-    description: 'The name of the artifact to use for the wasm'
+  vercelToken:
+    description: 'The token of vercel'
     required: true
-  wasmFileName:
-    description: 'The name of the wasm file after build'
-    required: true
-  OSS_REGION:
-    description: 'The region of the oss'
-    required: true
-  OSS_ACCESS_KEY_ID:
-    description: 'The access key id of the oss'
-    required: true
-  OSS_ACCESS_KEY_SECRET:
-    description: 'The access key secret of the oss'
-    required: true
-  OSS_BUCKET_NAME:
-    description: 'The bucket name of the oss'
-    required: true
-  OSS_BUCKET_ENDPOINT:
-    description: 'The bucket endpoint of the oss'
-    required: true
-
 
 runs:
-  using: 'composite'
-  steps:
-    - name: release
-      using: 'node20'
-      main: 'dist/index.js'
-
-branding:
-  icon: 'coffee'
-  color: 'gray-dark'
+    using: 'node20'
+    main: 'dist/index.js'

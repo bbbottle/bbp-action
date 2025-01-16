@@ -34,8 +34,6 @@ inputs:
 
 
 runs:
-#  using: 'node20'
-#  main: 'dist/index.js'
   using: 'composite'
   steps:
     - uses: actions/checkout@v4
@@ -55,9 +53,10 @@ runs:
 #      with:
 #        name: plugin-config
 #        path: plugin.json
-    - name: Release
-      run: node dist/index.js
-      shell: bash
+
+    - name: release
+      using: 'node20'
+      main: 'dist/index.js'
 
 branding:
   icon: 'coffee'

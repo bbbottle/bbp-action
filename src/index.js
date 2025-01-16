@@ -5,12 +5,22 @@ const {download} = require('./download');
 
 async function run() {
   try {
+    // fetch credentials from Vercel
     const res = await fetchVercelSecrets();
-    const upload = createUploader(res)
-    const wasmFile = await download('wasm-file', 'page_now.wasm');
-    await upload('page_now.wasm', wasmFile);
 
+    // create uploader
+    const upload = createUploader(res)
+
+    // upload wasm to OSS
+    const wasmName = core.getInput('wasm');
+    const wasmFile = await download('wasm-file', wasmName);
+    await upload(wasmName, wasmFile);
+
+    // fetch plugin config
     const pluginConfig = await download('plugin-config', 'plugin.json', 'utf8');
+
+    // upsert to supabase
+    // TODO: implement upsert to supabase
     core.info(JSON.parse(pluginConfig));
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);

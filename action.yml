@@ -5,6 +5,9 @@ inputs:
   token:
     description: 'The token of vercel'
     required: true
+  wasm:
+    description: 'The name of wasm file (eg. bbp_now.wasm)'
+    required: true
 
 runs:
   using: 'node20'

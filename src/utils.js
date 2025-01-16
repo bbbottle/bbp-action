@@ -12,16 +12,31 @@ export const fetchVercelSecrets = async () => {
   })
 }
 
-export const PickSecrets = (vercelSecrets, secretsName) => {
+export const fetchVercelEnv = async (id) => {
+  return vercel.projects.getProjectEnv({
+    idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
+    id,
+  })
+}
+
+export const PickSecrets = async (vercelSecrets, secretsName) => {
   const secrets = {};
-  console.log(JSON.stringify(vercelSecrets, null, 2));
   if (!vercelSecrets || !vercelSecrets.envs) {
     return secrets
   }
 
-  secretsName.forEach(name => {
-    secrets[name] = vercelSecrets.envs.find(secret => secret.key === name).value;
+  const res = await  Promise.all(vercelSecrets.envs
+    .filter((env) => {
+      return secretsName.includes(env.key)
+    })
+    .map(env => {
+      return fetchVercelEnv(env.id)
+    }))
+
+  res.forEach((env) => {
+    secrets[env.key] = env.value;
   });
 
+  console.log(JSON.stringify(secrets, null, 2));
   return secrets;
 }

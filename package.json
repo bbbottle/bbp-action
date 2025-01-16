@@ -15,6 +15,7 @@
     "@actions/github": "^6.0.0",
     "@types/ali-oss": "^6.16.11",
     "@vercel/ncc": "^0.38.3",
+    "@vercel/sdk": "^1.2.2",
     "ali-oss": "^6.17.1"
   },
   "devDependencies": {

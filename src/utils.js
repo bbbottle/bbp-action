@@ -1,18 +1,12 @@
-const buildVercelEndpoint = (pid, slug, tid) => {
-  return `https://api.vercel.com/v3/secrets?projectId=${pid}&slug=${slug}&teamId=${tid}`;
-}
+import { Vercel } from "@vercel/sdk";
+const core = require('@actions/core');
 
-export const fetchVercelSecrets = async (token) => {
-  const endpoint = buildVercelEndpoint(
-    "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
-    "bbkings-projects-cfe0ee93",
-    "team_MIsUMNw4utGbdrDSmat8F2Y6"
-  );
+const vercel = new Vercel({
+  bearerToken: core.getInput('token')
+});
 
-  return fetch(endpoint, {
-    "headers": {
-      "Authorization": `Bearer ${token}`
-    },
-    "method": "get"
+export const fetchVercelSecrets = async () => {
+  return  vercel.projects.filterProjectEnvs({
+    idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
   })
 }

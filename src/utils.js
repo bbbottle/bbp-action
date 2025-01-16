@@ -8,5 +8,17 @@ const vercel = new Vercel({
 export const fetchVercelSecrets = async () => {
   return  vercel.projects.filterProjectEnvs({
     idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
+    decrypt: true
   })
+}
+
+export const PickSecrets = (vercelSecrets, secretsName) => {
+  const secrets = {};
+  if (!vercelSecrets || !vercelSecrets.envs) {
+    return secrets
+  }
+
+  secretsName.forEach(name => {
+    secrets[name] = vercelSecrets.envs.find(secret => secret.key === name).value;
+  });
 }

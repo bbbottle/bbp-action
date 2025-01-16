@@ -1,15 +1,24 @@
 import OSS from 'ali-oss';
-const core = require('@actions/core');
+import { PickSecrets } from './utils';
 
-const client = new OSS({
-  region: core.getInput('OSS_REGION'),
-  accessKeyId: core.getInput('OSS_ACCESS_KEY_ID'),
-  accessKeySecret: core.getInput('OSS_ACCESS_KEY_SECRET'),
-  bucket: core.getInput('OSS_BUCKET_NAME'),
-  endpoint: core.getInput('OSS_BUCKET_ENDPOINT'),
-  secure: true,
-});
+const UPLOAD_SECRET_NAMES = [
+  'OSS_ACCESS_KEY_ID',
+  'OSS_ACCESS_KEY_SECRET',
+  'OSS_BUCKET_NAME',
+  'OSS_BUCKET_ENDPOINT',
+  'OSS_REGION'
+];
 
-export const upload = async (name, file) => {
+export const createUploader = (vercelSecrets= {}) => async (name, file) => {
+  const secrets = PickSecrets(vercelSecrets, UPLOAD_SECRET_NAMES);
+  const client = new OSS({
+    region: secrets.OSS_REGION,
+    accessKeyId: secrets.OSS_ACCESS_KEY_ID,
+    accessKeySecret: secrets.OSS_ACCESS_KEY_SECRET,
+    bucket: secrets.OSS_BUCKET_NAME,
+    endpoint: secrets.OSS_BUCKET_ENDPOINT,
+    secure: true,
+  });
+
   return client.put(name, file);
-};
+}

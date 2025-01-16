@@ -7,8 +7,25 @@ inputs:
     required: true
 
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - name: add target
+      run: rustup target add wasm32-unknown-unknown
+      shell: bash
+    - name: Build
+      run: cargo build --target wasm32-unknown-unknown --release
+      shell: bash
+    - name: Upload .wasm file
+      uses: actions/upload-artifact@v4
+      with:
+        name: wasm-file
+        path: target/wasm32-unknown-unknown/release/*.wasm
+    - name: Upload plugin.json file
+      uses: actions/upload-artifact@v4
+      with:
+        name: plugin-config
+        path: plugin.json
 
 branding:
   icon: 'coffee'

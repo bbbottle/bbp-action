@@ -11,6 +11,7 @@ const UPLOAD_SECRET_NAMES = [
 
 export const createUploader = (vercelSecrets= {}) => async (name, file) => {
   const secrets = PickSecrets(vercelSecrets, UPLOAD_SECRET_NAMES);
+  console.log(JSON.stringify(vercelSecrets), JSON.stringify(secrets));
   const client = new OSS({
     region: secrets.OSS_REGION,
     accessKeyId: secrets.OSS_ACCESS_KEY_ID,

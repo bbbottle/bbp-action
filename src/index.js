@@ -1,7 +1,5 @@
 const core = require('@actions/core');
-const {download} = require('./download');
-const {upload} = require('./upload');
-const {getPluginConfig, getWasmFile, fetchVercelSecrets} = require('./utils');
+const {fetchVercelSecrets} = require('./utils');
 
 async function run() {
   try {

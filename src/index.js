@@ -22,7 +22,7 @@ async function run() {
 
     console.log(pluginConfig);
 
-    console.log("parsed", JSON.parse(PluginConfig))
+    console.log("parsed", JSON.parse(pluginConfig))
 
     // update({
     //   ...pluginConfig,

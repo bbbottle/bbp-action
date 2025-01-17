@@ -1,12 +1,11 @@
 const core = require('@actions/core');
-const {fetchVercelSecrets} = require('./utils');
+const {fetchHCPSecrets} = require('./utils');
 const {createUploader} = require('./upload');
 const {download} = require('./download');
 
 async function run() {
   try {
-    // fetch credentials from Vercel
-    const res = await fetchVercelSecrets();
+    const res = await fetchHCPSecrets()
 
     // create uploader
     const upload = createUploader(res)

@@ -9,8 +9,8 @@ const UPLOAD_SECRET_NAMES = [
   'OSS_REGION'
 ];
 
-export const createUploader = (vercelSecrets= {}) => async (name, file) => {
-  const secrets = PickSecrets(vercelSecrets, UPLOAD_SECRET_NAMES);
+export const createUploader = (s = {}) => async (name, file) => {
+  const secrets = PickSecrets(s, UPLOAD_SECRET_NAMES);
   const client = new OSS({
     region: secrets.OSS_REGION,
     accessKeyId: secrets.OSS_ACCESS_KEY_ID,

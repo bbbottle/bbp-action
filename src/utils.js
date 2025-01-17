@@ -1,42 +1,37 @@
-import { Vercel } from "@vercel/sdk";
-const core = require('@actions/core');
+export const fetchHCPSecrets = async () => {
+      // Fetch secrets from HashiCorp Vault
+    const hcpApiToken = core.getInput('token');
+    const response = await fetch('https://api.cloud.hashicorp.com/secrets/2023-11-28/organizations/9a9e436c-5d79-4f01-80cb-27da22b47385/projects/7af0577c-801c-4443-9430-6dd478e50e56/apps/bbaction/secrets:open', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${hcpApiToken}`
+      }
+    });
 
-const vercel = new Vercel({
-  bearerToken: core.getInput('token')
-});
+    if (!response.ok) {
+      throw new Error(`Failed to fetch secrets: ${response.statusText}`);
+    }
 
-export const fetchVercelSecrets = async () => {
-  return  vercel.projects.filterProjectEnvs({
-    idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
-    decrypt: "true"
-  })
+    const result = await response.json();
+    if (!result.secrets || !result.secrets.length) {
+      throw new Error('Failed to fetch hcp secrets');
+    }
+
+    const secrets = {};
+    for (const secret of result.secrets) {
+      secrets[secret.name] = secret.static_version.value;
+    }
+
+    return secrets;
 }
 
-export const fetchVercelEnv = async (id) => {
-  return vercel.projects.getProjectEnv({
-    idOrName: "prj_h4XkOQ6vW1uHcVf9usvqwNsK43PH",
-    id,
-  })
-}
-
-export const PickSecrets = async (vercelSecrets, secretsName) => {
+export const PickSecrets = async (allSecretsMap, secretsName) => {
   const secrets = {};
-  if (!vercelSecrets || !vercelSecrets.envs) {
-    return secrets
+  for (const name of secretsName) {
+    if (allSecretsMap[name]) {
+      secrets[name] = allSecretsMap[name];
+    }
   }
-
-  const res = await Promise.all(vercelSecrets.envs
-    .filter((env) => {
-      return secretsName.includes(env.key)
-    })
-    .map(env => {
-      return fetchVercelEnv(env.id)
-    }))
-
-  res.forEach((env) => {
-    console.log("env: " + JSON.stringify(env, null, 2));
-    secrets[env.key] = env.value;
-  });
 
   return secrets;
 }

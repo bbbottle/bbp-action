@@ -18,21 +18,23 @@ export const fetchHCPSecrets = async () => {
       throw new Error('Failed to fetch hcp secrets');
     }
 
-    const secrets = {};
-    for (const secret of result.secrets) {
-      secrets[secret.name] = secret.static_version.value;
-    }
-
-    return secrets;
+    return result.secrets.map(s => ({
+      key: s.name,
+      value: s.static_version.value
+    }))
 }
 
-export const PickSecrets = async (allSecretsMap, secretsName) => {
+export const PickSecrets = async (allSecrets, secretsName) => {
   const secrets = {};
   for (const name of secretsName) {
-    if (allSecretsMap[name]) {
-      secrets[name] = allSecretsMap[name];
+    const secret = allSecrets.find(s => s.key === name);
+    if (secret) {
+      secrets[name] = secret.value;
     }
   }
+
+  console.log('allSecrets', JSON.stringify(allSecrets, null, 2));
+  console.log('secrets', JSON.stringify(secrets, null, 2));
 
   return secrets;
 }

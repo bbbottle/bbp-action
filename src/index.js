@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const {fetchHCPSecrets} = require('./utils');
 const {createUploader} = require('./upload');
+const {createConfigUpdater} = require('./update');
 const {download} = require('./download');
 
 async function run() {

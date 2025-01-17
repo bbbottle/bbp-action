@@ -24,7 +24,7 @@ async function run() {
 
     update({
       ...config,
-      url: uploadRes.url,
+      url: uploadRes.url + "?v" + pluginConfig.version,
     });
 
   } catch (error) {

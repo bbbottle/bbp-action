@@ -2,8 +2,11 @@ name: 'release bbp action'
 description: 'release plugins for bbki.ng'
 author: 'bbki.ng'
 inputs:
-  token:
-    description: 'The token of vercel'
+  hcp_client_id:
+    description: 'The client id of hcp'
+    required: true
+  hcp_client_secret:
+    description: 'The client secret of hcp'
     required: true
   wasm:
     description: 'The name of wasm file (eg. bbp_now.wasm)'

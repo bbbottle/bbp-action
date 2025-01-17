@@ -20,7 +20,7 @@ async function run() {
 
     // upsert to supabase
     // TODO: implement upsert to supabase
-    core.info(JSON.parse(pluginConfig));
+    core.info(pluginConfig);
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }

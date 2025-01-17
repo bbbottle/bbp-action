@@ -24,7 +24,7 @@ export const fetchHCPSecrets = async () => {
     }))
 }
 
-export const PickSecrets = async (allSecrets, secretsName) => {
+export const PickSecrets = (allSecrets, secretsName) => {
   const secrets = {};
   for (const name of secretsName) {
     const secret = allSecrets.find(s => s.key === name);
@@ -32,9 +32,6 @@ export const PickSecrets = async (allSecrets, secretsName) => {
       secrets[name] = secret.value;
     }
   }
-
-  console.log('allSecrets', JSON.stringify(allSecrets, null, 2));
-  console.log('secrets', JSON.stringify(secrets, null, 2));
 
   return secrets;
 }

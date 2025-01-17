@@ -1,3 +1,4 @@
+const core = require('@actions/core');
 export const fetchHCPSecrets = async () => {
       // Fetch secrets from HashiCorp Vault
     const hcpApiToken = core.getInput('token');

@@ -20,10 +20,10 @@ async function run() {
     const pluginConfig = await download('plugin-config', 'plugin.json', 'utf8');
     const update = createConfigUpdater(res);
 
-    console.log("parsed", JSON.parse(pluginConfig))
+    const config = JSON.parse(pluginConfig);
 
     update({
-      ...pluginConfig,
+      ...config,
       url: uploadRes.url,
     });
 

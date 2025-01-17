@@ -1,4 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
+import { PickSecrets } from './utils';
 
 export const createConfigUpdater = (s = {}) => async (config = {}) => {
     const supabaseUrl = 'https://cvxqmusfaxwuyvyuueco.supabase.co'

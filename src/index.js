@@ -13,14 +13,17 @@ async function run() {
     // upload wasm to OSS
     const wasmName = core.getInput('wasm');
     const wasmFile = await download('wasm-file', wasmName);
-    await upload(wasmName, wasmFile);
+    const uploadRes = await upload(wasmName, wasmFile);
 
     // fetch plugin config
     const pluginConfig = await download('plugin-config', 'plugin.json', 'utf8');
+    const update = createConfigUpdater(res);
 
-    // upsert to supabase
-    // TODO: implement upsert to supabase
-    core.info(pluginConfig);
+    update({
+      ...pluginConfig,
+      url: uploadRes.url,
+    });
+
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }
